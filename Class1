@@ -1,0 +1,22 @@
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+public class ConnectDB {
+static Connection Con = null;
+static String databaseName = "Studentdb";
+static String url = "jdbc:mysql://localhost:3306/"+databaseName;
+static String username="root";
+static String password = "bmscecse";
+	public static void main(String[] args) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException
+	{
+		Class.forName("com.Mysql.jdbc.Driver").newInstance();
+		Con=DriverManager.getConnection(url,username,password);
+		PreparedStatement ps = Con.prepareStatement("Insert into 'Studentdatabase'.'Student'('name','email') values('Arpu', 'arpu@gmail.com');");
+		int status = ps.executeUpdate();
+		if(status!=0)
+		{
+			System.out.println("Database was connected");
+			System.out.println("Record was inserted");
+		}
+	}
